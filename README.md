@@ -13,7 +13,7 @@ To help radiologist make more accurate diagnoses, neural networks have been impl
 \newline
 The problem is formulated as a multi-instance and multi-modal classification task. Given ultrasound and mammography images from a patient, the goal is to predict whether or not a malignant lesion is present.
 
-\section{Related Work}
+# Related Work
 
 This work builds extensively on Shen et al. 2021 and Shen et al. 2021b. Both papers are focused on the development of highly specialized single modality networks for ultrasound and mamography shown in Figure \ref{fig:nets}. We intend to build on those networks by adding a fusion module to yield a fused class prediction. 
 
@@ -29,12 +29,12 @@ In Shen at al. 2021b, a neural network is developed with the objective of reduci
     \label{fig:nets}
 \end{figure}
 
-\section{Experimental Evaluation}
+## Experimental Evaluation
 
-\subsection{Data}
+### Data 
 Our dataset consists of medical images and biopsy reports of approximately 300,000 patients. The dataset is a product of Nan et al. 2019 and Shamout et al. 2021. Imaging modalities in the dataset include mammography, ultrasound, and MRI, but we will only be using ultrasound and mammography modalities in this work. Patient records have been grouped into episodes and each episode has been associated with one of two class labels extracted from the biopsy report via an NLP pipeline; contains or does not contain a malignant lesion.
 
-\subsection{Methodology}
+### Methodology
 We approach multi-modal learning through a late fusion strategy. Single modality networks, shown in Figure \ref{fig:nets}, trained independently with a simple averaging late fusion strategy is used as a baseline and yields 0.867 test set AUROC. We will be comparing other late fusion strategies to this baseline.
 
 Two categories exist in our late fusion setting; prediction fusion and late representation fusion. Prediction fusion entails the fusion of predictions outputted by each single modality network, depicted in Figure \ref{fig:nets}, via an aggregation function such as simple averaging or an attention-based function. Late representation fusion entails the fusion of late representations from each single modality network to yield a single prediction via a neural network.
@@ -56,7 +56,7 @@ L(\mathbf{y}, \mathbf{\hat{y}},\mathbf{A}) = \textrm{BCE}(\mathrm{y}, \mathrm{\h
 
 Late representation fusion experiments suggest that modality-specific BCE loss results in performance degradation hence the $\textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{US})$ and $ \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{M})$ terms were dropped from the loss function resulting in Equation \ref{eq:loss_no_gblend}.
 
-\subsection{Results}
+### Results
 
 We experimented with three different variants for prediction fusion. The first involves training the single modality networks simultaneously with a simple averaging fusion strategy. The second uses a gated attention mechanism (GAM) to perform a weighted average of the single modality predictions (Ilse et al., 2018). GAM module is given by
 
@@ -117,7 +117,7 @@ Late fusion experiment results are shown in Table \ref{tbl:latefusion}. Column h
 \end{figure}
 
 
-\subsection{Discussion}
+## Discussion
 
 An ubiquitous factor that hinders performance across all our experiments is the imbalance between learning from the two modalities (Wu et al., 2020). Figure \ref{fig:imbalance} shows sample learning curves for a prediction fusion model that demonstrates the imbalanced learning process. The three charts depicted in the figure are associated with validation AUROC for the fused class prediction, the mammography network class prediction, and the ultrasound network class prediction. All the networks are trained simultaneously in this scenario with one learning rate. It appears that the performance of the fused prediction plateaus. Note that there are two opposing factors that lead to this plateau behavior; past 15 epochs (1) the mammography network performance increases, while (2) the ultrasound network performance decreases. It appears that the point of overfitting occurs much earlier in the ultrasound network in comparison to the mammography network. We suspect that one of the culprits of the imbalanced training is the training data distribution. The training data has many more mammography exams than ultrasound exams which likely contributes to imbalanced training between the two modalities (329,709 mammography exams vs. 96,358 ultrasound exams). This may be remedied by using different learning rates for different parts of the multi-modal network such that the point of overfitting for each part of the network coincide.
 
@@ -128,7 +128,7 @@ An ubiquitous factor that hinders performance across all our experiments is the 
     \label{fig:imbalance}
 \end{figure}
 
-\section{Conclusions}
+## Conclusion 
 
 We have implemented and trained multi-modal networks for breast cancer detection using a late fusion strategy. From the methods we experimented with, the best performing approach is a late representation fusion strategy with a transformer encoder architecture which has been trained by first loading pre-trained weights and fine-tuning only the fusion module. The resulting test set AUROC of this approach is 0.886 and beats the baseline by 0.019. For future work, we suggest leveraging the cross-attention operation in a transformer for late fusion as done in Lu et al. 2019. To better align representations extracted from each modality, we suggest adding a cross-modality matching objective as done in Tan et al. 2019. One can also explore intermediate fusion strategies through the use of Multi-modal Transfer Module as the intermediate fusion network (Vaezi et al. 2019).
 
@@ -136,7 +136,7 @@ We have implemented and trained multi-modal networks for breast cancer detection
 
 \newpage
 
-\section*{References}
+## References
 \begin{enumerate}[ {[}1{]} ]
     \item Dosovitskiy, Alexey, et al. "An image is worth 16x16 words: Transformers for image recognition at scale." arXiv preprint arXiv:2010.11929 (2020).
     \item Ilse, Maximilian, Jakub Tomczak, and Max Welling. "Attention-based deep multiple instance learning." International conference on machine learning. PMLR, 2018.
