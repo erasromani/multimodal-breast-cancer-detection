@@ -1,8 +1,5 @@
 {% include header.html %}
 
-# Multi-modal Breast Cancer Detection
-
-
 **Abstract:**: In this work, we investigate leveraging multiple modalities to reduce the false negative rate in breast cancer screening with artificial intelligence (AI). Recent work has shown that neural networks can be trained effectively for single modality breast cancer detection. Due to occlusions, some lesions are not visible in certain modalities. Our goal is to improve system performance by leveraging multiple modalities. Single modality networks trained independently with a simple averaging late fusion strategy is used as a baseline. With a transformer-based late fusion strategy, we beat the baseline by 0.019 AUROC.
 
 ## Introduction 
