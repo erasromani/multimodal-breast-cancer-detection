@@ -1,70 +1,10 @@
 # Multi-modal Breast Cancer Detection
 
-\documentclass{article}
-
-% if you need to pass options to natbib, use, e.g.:
-% \PassOptionsToPackage{numbers, compress}{natbib}
-% before loading neurips_2021
-
-% ready for submission
-% \usepackage{neurips_2021}
-
-% to compile a preprint version, e.g., for submission to arXiv, add add the
-% [preprint] option:
-\usepackage[preprint]{neurips_2021}
-
-% to compile a camera-ready version, add the [final] option, e.g.:
-%     \usepackage[final]{neurips_2021}
-
-% to avoid loading the natbib package, add option nonatbib:
-%    \usepackage[nonatbib]{neurips_2021}
-
-\usepackage[utf8]{inputenc} % allow utf-8 input
-\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
-\usepackage{hyperref}       % hyperlinks
-\usepackage{url}            % simple URL typesetting
-\usepackage{booktabs}       % professional-quality tables
-\usepackage{amsfonts}       % blackboard math symbols
-\usepackage{nicefrac}       % compact symbols for 1/2, etc.
-\usepackage{microtype}      % microtypography
-\usepackage{xcolor}         % colors
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{enumerate}
-\usepackage[shortlabels]{enumitem}
-\usepackage{graphicx}
-\graphicspath{ {images/} }
-
-\title{Multi-modal Breast Cancer Detection}
-
-% The \author macro works with any number of authors. There are two commands
-% used to separate the names and addresses of multiple authors: \And and \AND.
-%
-% Using \And between authors leaves it to LaTeX to determine where to break the
-% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
-% authors names on the first line, and the last on the second line, try using
-% \AND instead of \And before the third author name.
-
-\author{%
-  Ebrahim Khalil Rasromani \\
-  Center for Data Science \\
-  New York University\\
-  New York, NY 10011 \\
-  \texttt{ekr6072@nyu.edu} \\
-  % examples of more authors
-}
-
-
-
-\begin{document}
-
-\maketitle
-
-\begin{abstract}
-  In this work, we investigate leveraging multiple modalities to reduce the false negative rate in breast cancer screening with artificial intelligence (AI). Recent work has shown that neural networks can be trained effectively for single modality breast cancer detection. Due to occlusions, some lesions are not visible in certain modalities. Our goal is to improve system performance by leveraging multiple modalities. Single modality networks trained independently with a simple averaging late fusion strategy is used as a baseline. With a transformer-based late fusion strategy, we beat the baseline by 0.019 AUROC.
+## Abstract
+In this work, we investigate leveraging multiple modalities to reduce the false negative rate in breast cancer screening with artificial intelligence (AI). Recent work has shown that neural networks can be trained effectively for single modality breast cancer detection. Due to occlusions, some lesions are not visible in certain modalities. Our goal is to improve system performance by leveraging multiple modalities. Single modality networks trained independently with a simple averaging late fusion strategy is used as a baseline. With a transformer-based late fusion strategy, we beat the baseline by 0.019 AUROC.
 \end{abstract}
 
-\section{Introduction}
+## Introduction 
 
 Breast cancer is amongst the top ten largest contributor to global deaths for women. From an AI perspective, making advancements towards tackling breast cancer is possible due to the volume of data made available by well established screening programs. Annual screening mammography exams in the US, for example, is common practice for women above 40. Such screening exams consists of low dose X-ray from two views for each breasts; bilateral craniocaudal (CC) and mediolateral oblique (MLO). Women with dense breast typically undergo further screen via ultrasound as lesion in dense breast may be occult in mammography images. Upon examining the medical images, radiologist determine if further diagnostic exams are required. When a lesion is seen, radiologist assess the probability of malignancy for the lesion reported as a BI-RADS score between 1-6. A BI-RADS 1 and 2 suggest low probability of malignancy. A BI-RADS 3 requires a short-interval follow-up, while BI-RADS 4 and above requires an immediate biopsy due to high probability of malignancy. Only once a biopsy is done, can a lesion be confirmed as malignant or benign.
 
