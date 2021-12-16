@@ -21,7 +21,7 @@ Due to the large resolution of mammography images (2944 by 1920 pixels) and the 
 In Shen at al. 2021b, a neural network is developed with the objective of reducing the false-positive rates as radiologist breast cancer diagnosis with ultrasound images are typically associated with higher false-positive rates. The network consists of a resnet feature extractor followed by a one-by-one convolution with a sigmoid activation to yield saliency maps. The saliency maps are aggregated to a prediction via top-k pooling. The resulting image level prediction are aggregated to breast level predictions via an attention mechanism.
 
 <figure align="center">
-  <img src="https://github.com/erasromani/multimodal-breast-cancer-detection/blob/main/images/nets.png" alt="nets"/>
+  <img src="https://erasromani.github.io/multimodal-breast-cancer-detection/images/nets.png" alt="nets"/>
   <figcaption>Figure 1: Single modality networks for ultrasound and mammography. [2])</figcaption>
 </figure>
 
