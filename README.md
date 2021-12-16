@@ -14,7 +14,7 @@ The problem is formulated as a multi-instance and multi-modal classification tas
 
 # Related Work
 
-This work builds extensively on Shen et al. 2021 and Shen et al. 2021b. Both papers are focused on the development of highly specialized single modality networks for ultrasound and mamography shown in Figure \ref{fig:nets}. We intend to build on those networks by adding a fusion module to yield a fused class prediction. 
+This work builds extensively on Shen et al. 2021 and Shen et al. 2021b. Both papers are focused on the development of highly specialized single modality networks for ultrasound and mamography shown in Figure 1. We intend to build on those networks by adding a fusion module to yield a fused class prediction. 
 
 Due to the large resolution of mammography images (2944 by 1920 pixels) and the relatively small size of a potential lesion, authors of Shen et al. 2021 focus on developing a model that has the ability to focus on both local features and global ones. The difficulty with with diagnosing breast cancer from mammography images is that both local features, such as lesion shape, and the global features, such as tissue density distribution and breast structure, are critical factors to consider for the diagnosis. To account for this, the authors developed a novel network called globally-aware multiple instance classifier (GMIC), which consists of a global and a local module. The global module identifies smaller regions of interest and learns the global structure of the breast, while the local module inspects smaller relevant features in the identified regions of interest. Features from the two module are then combined to yield a final prediction.
 \newline
