@@ -1,1 +1,1 @@
-# multimodal-breast-cancer-detection
+# Multi-modal Breast Cancer Detection
