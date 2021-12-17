@@ -7,8 +7,7 @@
 Breast cancer is amongst the top ten largest contributor to global deaths for women. From an AI perspective, making advancements towards tackling breast cancer is possible due to the volume of data made available by well established screening programs. Annual screening mammography exams in the US, for example, is common practice for women above 40. Such screening exams consists of low dose X-ray from two views for each breasts; bilateral craniocaudal (CC) and mediolateral oblique (MLO). Women with dense breast typically undergo further screen via ultrasound as lesion in dense breast may be occult in mammography images. Upon examining the medical images, radiologist determine if further diagnostic exams are required. When a lesion is seen, radiologist assess the probability of malignancy for the lesion reported as a BI-RADS score between 1-6. A BI-RADS 1 and 2 suggest low probability of malignancy. A BI-RADS 3 requires a short-interval follow-up, while BI-RADS 4 and above requires an immediate biopsy due to high probability of malignancy. Only once a biopsy is done, can a lesion be confirmed as malignant or benign.
 
 To help radiologist make more accurate diagnoses, neural networks have been implemented to analyze medical images. Most of the recent work done for breast cancer is focused on training networks with a single modality. We would like to leverage multiple modality to both take advantage of as much patient history as possible and combat presence of occluded lesions in some modalities or views.
-\newline
-\newline
+
 The problem is formulated as a multi-instance and multi-modal classification task. Given ultrasound and mammography images from a patient, the goal is to predict whether or not a malignant lesion is present.
 
 # Related Work
@@ -69,26 +68,13 @@ Our late fusion approach follows a similar form to the transformer based predict
 
 For all late fusion methods, we ran three sets of experiments; (1) network is trained end-to-end, (2) pre-trained weights are loaded for single modality networks and only the fusion module is trained, and (3) pre-trained weights are loaded and frozen, fusion module is trained until convergence, followed by unfreezing all weights and fine-tuning the whole multi-modal network until convergence. Note that the pre-trained weights for the single modality networks are obtained from the baseline. Adam optimizer is used for all experiments with weight decay value of \\( 10^{-5} \\), \\( \beta_1=0.9 \\), and \\( \beta_2=0.999 \\). Grid-based hyperparameter search was conducted for the learning rate and the single modality network configuration. \\( \beta \\) and \\( \gamma \\) from Equation \ref{eq:loss} and Equation \ref{eq:loss_no_gblend} were set to  0.1 and 0.01 respectively.
 
-\begin{table}
-\caption{Validation AUROC results associated with best performing late fusion models trained until convergence with early stopping}
-\begin{center}
-\begin{tabular}{| c | c | 
-c | c |} 
- \hline
- \textbf{Method} & \textbf{End-to-end} & \textbf{Fine-tune fusion module} & \textbf{Fine-tune whole network} \\ [1ex] 
- \hline\hline
- Mean prediction fusion & 0.841 & N/A & N/A \\ 
- \hline
- GAM-based prediction fusion & 0.863 & N/A & N/A \\
- \hline
- Transformer-based prediction fusion & 0.856 & 0.879 & 0.888 \\
- \hline
- Transformer-based late fusion & 0.856 & 0.900 & 0.896 \\ [1ex] 
- \hline
-\end{tabular}
-\end{center}
-\label{tbl:latefusion}
-\end{table}
+Table 1: Validation AUROC results associated with best performing late fusion models trained until convergence with early stopping
+| Method      | End-to-end | Fine-tune fusion module | Fine-tune whole network |
+| ----------- | ----------- | ----------- | ----------- |
+| Mean prediction fusion | 0.841 | N/A | N/A |
+| GAM-based prediction fusion   | 0.863 | N/A | N/A |
+| Transformer-based prediction fusion   | 0.856 | 0.879 | 0.888 |
+| Transformer-based late representation fusion   | 0.856 | 0.900 | 0.896 |
 
 Late fusion experiment results are shown in Table \ref{tbl:latefusion}. Column headers "End-to-end", "Fine-tune fusion module", and "Fine-tune whole network" in Table \ref{tbl:latefusion} correspond to experiments (1), (2), and (3) discussed in the prior paragraph respectively. Loading pre-trained weights for the single modality networks before training yields a significant improvement in performance. Fine-tuning the whole network yields inconclusive results as performance does not necessarily increase in comparison to using a pre-trained single modality network and fine-tuning just the fusion module. The best performing model is the pre-trained transformer-based late fusion model in which only the fusion module is fine-tuned, resulting in 0.900 validation AUROC.
 
@@ -110,8 +96,6 @@ An ubiquitous factor that hinders performance across all our experiments is the 
 ## Conclusion 
 
 We have implemented and trained multi-modal networks for breast cancer detection using a late fusion strategy. From the methods we experimented with, the best performing approach is a late representation fusion strategy with a transformer encoder architecture which has been trained by first loading pre-trained weights and fine-tuning only the fusion module. The resulting test set AUROC of this approach is 0.886 and beats the baseline by 0.019. For future work, we suggest leveraging the cross-attention operation in a transformer for late fusion as done in Lu et al. 2019. To better align representations extracted from each modality, we suggest adding a cross-modality matching objective as done in Tan et al. 2019. One can also explore intermediate fusion strategies through the use of Multi-modal Transfer Module as the intermediate fusion network (Vaezi et al. 2019).
-
-\newpage
 
 ## References
 1. Dosovitskiy, Alexey, et al. "An image is worth 16x16 words: Transformers for image recognition at scale." arXiv preprint arXiv:2010.11929 (2020).
