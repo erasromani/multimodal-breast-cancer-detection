@@ -7,8 +7,7 @@
 Breast cancer is amongst the top ten largest contributor to global deaths for women. From an AI perspective, making advancements towards tackling breast cancer is possible due to the volume of data made available by well established screening programs. Annual screening mammography exams in the US, for example, is common practice for women above 40. Such screening exams consists of low dose X-ray from two views for each breasts; bilateral craniocaudal (CC) and mediolateral oblique (MLO). Women with dense breast typically undergo further screen via ultrasound as lesion in dense breast may be occult in mammography images. Upon examining the medical images, radiologist determine if further diagnostic exams are required. When a lesion is seen, radiologist assess the probability of malignancy for the lesion reported as a BI-RADS score between 1-6. A BI-RADS 1 and 2 suggest low probability of malignancy. A BI-RADS 3 requires a short-interval follow-up, while BI-RADS 4 and above requires an immediate biopsy due to high probability of malignancy. Only once a biopsy is done, can a lesion be confirmed as malignant or benign.
 
 To help radiologist make more accurate diagnoses, neural networks have been implemented to analyze medical images. Most of the recent work done for breast cancer is focused on training networks with a single modality. We would like to leverage multiple modality to both take advantage of as much patient history as possible and combat presence of occluded lesions in some modalities or views.
-\newline
-\newline
+
 The problem is formulated as a multi-instance and multi-modal classification task. Given ultrasound and mammography images from a patient, the goal is to predict whether or not a malignant lesion is present.
 
 # Related Work
