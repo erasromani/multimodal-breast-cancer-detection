@@ -68,14 +68,6 @@ Our late fusion approach follows a similar form to the transformer based predict
 
 For all late fusion methods, we ran three sets of experiments; (1) network is trained end-to-end, (2) pre-trained weights are loaded for single modality networks and only the fusion module is trained, and (3) pre-trained weights are loaded and frozen, fusion module is trained until convergence, followed by unfreezing all weights and fine-tuning the whole multi-modal network until convergence. Note that the pre-trained weights for the single modality networks are obtained from the baseline. Adam optimizer is used for all experiments with weight decay value of \\( 10^{-5} \\), \\( \beta_1=0.9 \\), and \\( \beta_2=0.999 \\). Grid-based hyperparameter search was conducted for the learning rate and the single modality network configuration. \\( \beta \\) and \\( \gamma \\) from Equation \ref{eq:loss} and Equation \ref{eq:loss_no_gblend} were set to  0.1 and 0.01 respectively.
 
-Table 1: Validation AUROC results associated with best performing late fusion models trained until convergence with early stopping
-| Method      | End-to-end | Fine-tune fusion module | Fine-tune whole network |
-| ----------- | ----------- | ----------- | ----------- |
-| Mean prediction fusion | 0.841 | N/A | N/A |
-| GAM-based prediction fusion   | 0.863 | N/A | N/A |
-| Transformer-based prediction fusion   | 0.856 | 0.879 | 0.888 |
-| Transformer-based late representation fusion   | 0.856 | 0.900 | 0.896 |
-
 <figure align="center">
   <img src="https://erasromani.github.io/multimodal-breast-cancer-detection/images/table.png" alt="table"/>
   <figcaption>Table 1: Validation AUROC results associated with best performing late fusion models trained until convergence with early stopping.)</figcaption>
