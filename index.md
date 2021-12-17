@@ -76,6 +76,11 @@ Table 1: Validation AUROC results associated with best performing late fusion mo
 | Transformer-based prediction fusion   | 0.856 | 0.879 | 0.888 |
 | Transformer-based late representation fusion   | 0.856 | 0.900 | 0.896 |
 
+<figure align="center">
+  <img src="https://erasromani.github.io/multimodal-breast-cancer-detection/images/table.png" alt="table"/>
+  <figcaption>Table 1: Validation AUROC results associated with best performing late fusion models trained until convergence with early stopping.)</figcaption>
+</figure>
+
 Late fusion experiment results are shown in Table \ref{tbl:latefusion}. Column headers "End-to-end", "Fine-tune fusion module", and "Fine-tune whole network" in Table \ref{tbl:latefusion} correspond to experiments (1), (2), and (3) discussed in the prior paragraph respectively. Loading pre-trained weights for the single modality networks before training yields a significant improvement in performance. Fine-tuning the whole network yields inconclusive results as performance does not necessarily increase in comparison to using a pre-trained single modality network and fine-tuning just the fusion module. The best performing model is the pre-trained transformer-based late fusion model in which only the fusion module is fine-tuned, resulting in 0.900 validation AUROC.
 
 <figure align="center">
