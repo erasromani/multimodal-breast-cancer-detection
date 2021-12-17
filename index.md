@@ -24,7 +24,6 @@ In Shen at al. 2021b, a neural network is developed with the objective of reduci
   <figcaption>Figure 1: Single modality networks for ultrasound and mammography.)</figcaption>
 </figure>
 
-
 ## Experimental Evaluation
 
 ### Data 
@@ -38,13 +37,12 @@ Two categories exist in our late fusion setting; prediction fusion and late repr
 The loss function associated with training prediction fusion models is 
 
 $$ L(\mathbf{y}, \mathbf{\hat{y}},\mathbf{A}) = \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{fusion}) + \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{US}) + \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{M}) + \beta \sum_{(i, j)}|\mathbf{A}[i, j]_M| + \gamma \sum_{(i, j)}|\mathbf{A}[i, j]_{US}|$$
-where $\textrm{BCE}$ is the binary cross-entropy loss function, $\mathbf{y}$ is the label, $\mathrm{\hat{y}}_{fusion}$ is the fused class prediction, $\mathrm{\hat{y}}_{US}$ is the class prediction from the ultrasound network, and $\mathrm{\hat{y}}_{M}$ is the class prediction for the mammography network. As shown in Figure \ref{fig:nets}, both the ultrasound and mammography networks have been designed to output saliency maps, given as $\mathbf{A}[i, j]_{US}$ and $\mathbf{A}[i, j]_{M}$ in Equation \ref{eq:loss}. Throughout this paper we will refer to the first three terms from Equation \ref{eq:loss} as modality-specific BCE loss and the last two terms as Class Activation Map (CAM) loss. Note that the CAM loss acts as a regularizer to limit high activation regions in the saliency maps. $\beta$ and $\gamma$ in Equation \ref{eq:loss} are weighting factors to control the scale of CAM loss relative to the modality-specific BCE loss. 
+
+where \\( \textrm{BCE} \\) is the binary cross-entropy loss function, \\( \mathbf{y} \\) is the label, \\( \mathrm{\hat{y}}_{fusion} \\) is the fused class prediction, \\( \mathrm{\hat{y}}_{US} \\) is the class prediction from the ultrasound network, and \\( \mathrm{\hat{y}}_{M} \\) is the class prediction for the mammography network. As shown in Figure \ref{fig:nets}, both the ultrasound and mammography networks have been designed to output saliency maps, given as \\( \mathbf{A}[i, j]_{US} \\) and \\( \mathbf{A}[i, j]_{M} \\) in Equation \ref{eq:loss}. Throughout this paper we will refer to the first three terms from Equation \ref{eq:loss} as modality-specific BCE loss and the last two terms as Class Activation Map (CAM) loss. Note that the CAM loss acts as a regularizer to limit high activation regions in the saliency maps. \\( \beta \\) and \\( \gamma \\) in Equation \ref{eq:loss} are weighting factors to control the scale of CAM loss relative to the modality-specific BCE loss. 
 
 For late representation fusion, the loss function is given by
-\begin{equation}
-L(\mathbf{y}, \mathbf{\hat{y}},\mathbf{A}) = \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{fusion}) + \beta \sum_{(i, j)}|\mathbf{A}[i, j]_M| + \gamma \sum_{(i, j)}|\mathbf{A}[i, j]_{US}|.
-\label{eq:loss_no_gblend}
-\end{equation}
+
+$$ L(\mathbf{y}, \mathbf{\hat{y}},\mathbf{A}) = \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{fusion}) + \beta \sum_{(i, j)}|\mathbf{A}[i, j]_M| + \gamma \sum_{(i, j)}|\mathbf{A}[i, j]_{US}|.$$
 
 Late representation fusion experiments suggest that modality-specific BCE loss results in performance degradation hence the \\( \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{US}) \\) and \\( \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{M}) \\) terms were dropped from the loss function resulting in Equation \ref{eq:loss_no_gblend}.
 
@@ -116,18 +114,13 @@ We have implemented and trained multi-modal networks for breast cancer detection
 \newpage
 
 ## References
-\begin{enumerate}[ {[}1{]} ]
-    \item Dosovitskiy, Alexey, et al. "An image is worth 16x16 words: Transformers for image recognition at scale." arXiv preprint arXiv:2010.11929 (2020).
-    \item Ilse, Maximilian, Jakub Tomczak, and Max Welling. "Attention-based deep multiple instance learning." International conference on machine learning. PMLR, 2018.
-    \item Lu, Jiasen, et al. "Vilbert: Pretraining task-agnostic visiolinguistic representations for vision-and-language tasks." arXiv preprint arXiv:1908.02265 (2019).
-    \item Shamout, F. et al. The NYU breast ultrasound dataset v1.0. Tech. Rep. (2021).
-    \item Shen, Yiqiu, et al. "An interpretable classifier for high-resolution breast cancer screening images utilizing weakly supervised localization." Medical image analysis 68 (2021): 101908.
-    \item Shen, Yiqiu, et al. "Artificial Intelligence System Reduces False-Positive Findings in the Interpretation of Breast Ultrasound Exams." medRxiv (2021b).
-    \item Tan, Hao, and Mohit Bansal. "Lxmert: Learning cross-modality encoder representations from transformers." arXiv preprint arXiv:1908.07490 (2019).
-    \item Vaezi Joze, Hamid Reza, et al. "MMTM: multimodal transfer module for CNN fusion." arXiv e-prints (2019): arXiv-1911.
-    \item Wu, Nan, et al. "The NYU breast cancer screening dataset V1. 0." New York Univ., New York, NY, USA, Tech. Rep (2019).
-    \item Wu, Nan, et al. "Improving the Ability of Deep Neural Networks to Use Information from Multiple Views in Breast Cancer Screening." Medical Imaging with Deep Learning. PMLR, 2020.
-    
-\end{enumerate}
-
-\end{document}
+1. Dosovitskiy, Alexey, et al. "An image is worth 16x16 words: Transformers for image recognition at scale." arXiv preprint arXiv:2010.11929 (2020).
+2. Ilse, Maximilian, Jakub Tomczak, and Max Welling. "Attention-based deep multiple instance learning." International conference on machine learning. PMLR, 2018.
+3. Lu, Jiasen, et al. "Vilbert: Pretraining task-agnostic visiolinguistic representations for vision-and-language tasks." arXiv preprint arXiv:1908.02265 (2019).
+4. Shamout, F. et al. The NYU breast ultrasound dataset v1.0. Tech. Rep. (2021).
+5. Shen, Yiqiu, et al. "An interpretable classifier for high-resolution breast cancer screening images utilizing weakly supervised localization." Medical image analysis 68 (2021): 101908.
+6. Shen, Yiqiu, et al. "Artificial Intelligence System Reduces False-Positive Findings in the Interpretation of Breast Ultrasound Exams." medRxiv (2021b).
+7. Tan, Hao, and Mohit Bansal. "Lxmert: Learning cross-modality encoder representations from transformers." arXiv preprint arXiv:1908.07490 (2019).
+8. Vaezi Joze, Hamid Reza, et al. "MMTM: multimodal transfer module for CNN fusion." arXiv e-prints (2019): arXiv-1911.
+9. Wu, Nan, et al. "The NYU breast cancer screening dataset V1. 0." New York Univ., New York, NY, USA, Tech. Rep (2019).
+10. Wu, Nan, et al. "Improving the Ability of Deep Neural Networks to Use Information from Multiple Views in Breast Cancer Screening." Medical Imaging with Deep Learning. PMLR, 2020.
