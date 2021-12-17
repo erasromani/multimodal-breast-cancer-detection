@@ -77,7 +77,7 @@ Late fusion experiment results are shown in Table \ref{tbl:latefusion}. Column h
 
 <figure align="center">
   <img src="https://erasromani.github.io/multimodal-breast-cancer-detection/images/transformer_table.png" alt="transformer"/>
-  <figcaption>Figure 2: Late fusion transformer method used for prediction fusion and late representation fusion.)</figcaption>
+  <figcaption>Figure 2: Late fusion transformer method used for prediction fusion and late representation fusion.</figcaption>
 </figure>
 
 
@@ -87,7 +87,7 @@ An ubiquitous factor that hinders performance across all our experiments is the 
 
 <figure align="center">
   <img src="https://erasromani.github.io/multimodal-breast-cancer-detection/images/imbalance.png" alt="imbalance"/>
-  <figcaption>Figure 3: Sample learning curves for end-to-end training of a prediction fusion model. Each curve represents a different set of hyperparameters. (left) validation AUROC of fused prediction, (middle) validation AUROC of mammography network prediction, (right) validation AUROC of ultrasound network.)</figcaption>
+  <figcaption>Figure 3: Sample learning curves for end-to-end training of a prediction fusion model. Each curve represents a different set of hyperparameters. (left) validation AUROC of fused prediction, (middle) validation AUROC of mammography network prediction, (right) validation AUROC of ultrasound network.</figcaption>
 </figure>
 
 ## Conclusion 
