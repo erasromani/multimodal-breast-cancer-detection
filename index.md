@@ -35,13 +35,13 @@ Two categories exist in our late fusion setting; prediction fusion and late repr
 
 The loss function associated with training prediction fusion models is 
 
-$$ L(\mathbf{y}, \mathbf{\hat{y}},\mathbf{A}) = \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{fusion}) + \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{US}) + \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{M}) + \beta \sum_{(i, j)}|\mathbf{A}[i, j]_M| + \gamma \sum_{(i, j)}|\mathbf{A}[i, j]_{US}| \quad (1)$$
+$$ L(\mathbf{y}, \mathbf{\hat{y}},\mathbf{A}) = \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{fusion}) + \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{US}) + \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{M}) + \beta \sum_{(i, j)}|\mathbf{A}[i, j]_M| + \gamma \sum_{(i, j)}|\mathbf{A}[i, j]_{US}| \tag{1}$$
 
 where \\(\textrm{BCE}\\) is the binary cross-entropy loss function, \\(\mathbf{y}\\) is the label, \\( \mathrm{\hat{y}\_{fusion}} \\) is the fused class prediction, \\( \mathrm{\hat{y}}\_{US} \\) is the class prediction from the ultrasound network, and \\( \mathrm{\hat{y}}\_{M} \\) is the class prediction for the mammography network. As shown in Figure 1, both the ultrasound and mammography networks have been designed to output saliency maps, given as \\( \mathbf{A}[i, j]\_{US} \\) and \\( \mathbf{A}[i, j]\_{M} \\) in Equation \ref{eq:loss}. Throughout this paper we will refer to the first three terms from Equation \ref{eq:loss} as modality-specific BCE loss and the last two terms as Class Activation Map (CAM) loss. Note that the CAM loss acts as a regularizer to limit high activation regions in the saliency maps. \\( \beta \\) and \\( \gamma \\) in Equation \ref{eq:loss} are weighting factors to control the scale of CAM loss relative to the modality-specific BCE loss. 
 
 For late representation fusion, the loss function is given by
 
-$$ L(\mathbf{y}, \mathbf{\hat{y}},\mathbf{A}) = \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{fusion}) + \beta \sum_{(i, j)}|\mathbf{A}[i, j]_M| + \gamma \sum_{(i, j)}|\mathbf{A}[i, j]_{US}|. \tag{(1)} $$
+$$ L(\mathbf{y}, \mathbf{\hat{y}},\mathbf{A}) = \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{fusion}) + \beta \sum_{(i, j)}|\mathbf{A}[i, j]_M| + \gamma \sum_{(i, j)}|\mathbf{A}[i, j]_{US}|. \tag{2}$$
 
 Late representation fusion experiments suggest that modality-specific BCE loss results in performance degradation hence the \\( \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}\_{US}) \\) and \\( \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}\_{M}) \\) terms were dropped from the loss function resulting in Equation \ref{eq:loss_no_gblend}.
 
@@ -49,16 +49,16 @@ Late representation fusion experiments suggest that modality-specific BCE loss r
 
 We experimented with three different variants for prediction fusion. The first involves training the single modality networks simultaneously with a simple averaging fusion strategy. The second uses a gated attention mechanism (GAM) to perform a weighted average of the single modality predictions (Ilse et al., 2018). GAM module is given by
 
-$$\boldsymbol{\alpha}_k = \frac{\mathbf{W}^{\intercal}\tanh(\mathbf{V}\mathbf{v}_k^{\intercal})\odot\textrm{sigm}(\mathbf{U}\mathbf{v}_k^{\intercal})}{\sum_{j=1}^K \exp\{\mathbf{W}^\intercal(\tanh(\mathbf{V}\mathbf{v}_j^\intercal)\odot\textrm{sigm}(\mathbf{U}\mathbf{v}_j^{\intercal})\}}$$
+$$\boldsymbol{\alpha}_k = \frac{\mathbf{W}^{\intercal}\tanh(\mathbf{V}\mathbf{v}_k^{\intercal})\odot\textrm{sigm}(\mathbf{U}\mathbf{v}_k^{\intercal})}{\sum_{j=1}^K \exp\{\mathbf{W}^\intercal(\tanh(\mathbf{V}\mathbf{v}_j^\intercal)\odot\textrm{sigm}(\mathbf{U}\mathbf{v}_j^{\intercal})\}} \tag{3}$$
 
 where \\( \mathbf{v}\_k \\) is the concatenated late representation feature vectors from ultrasound and mammography networks and \\( K \\) is the total number of images per episode. \\( \mathbf{U} \\), \\( \mathbf{V} \\), and \\( \mathbf{W} \\) are learnable parameters of the GAM module. The output of GAM, given by \\( \boldsymbol{\alpha}\_k \\), are attention weights associated with each late representation feature vector. Note that attention weights associated with one episode are parameterized such that they sum to one. Aggregating the resulting attention weights to the breast level is done by summing \\( \boldsymbol{\alpha}\_k \\) associate with each modality. This aggregation procedure produces \\( \boldsymbol{\alpha}\_{US} \\) and \\( \boldsymbol{\alpha}\_M \\) given by
 
 $$\boldsymbol{\alpha}_{US} = \sum_{k \in US} \boldsymbol{\alpha}_k, \quad
-\boldsymbol{\alpha}_{M} = \sum_{k \in M} \boldsymbol{\alpha}_k.$$
+\boldsymbol{\alpha}_{M} = \sum_{k \in M} \boldsymbol{\alpha}_k. \tag{4}$$
 
 A fused prediction is produced by
 
-$$ \mathbf{\hat{y}} = \boldsymbol{\alpha}_{US} \mathbf{\hat{y}}_{US} + \boldsymbol{\alpha}_{M} \mathbf{\hat{y}}_M $$
+$$ \mathbf{\hat{y}} = \boldsymbol{\alpha}_{US} \mathbf{\hat{y}}_{US} + \boldsymbol{\alpha}_{M} \mathbf{\hat{y}}_M \tag{5}$$
 
 where \\( \mathbf{\hat{y}}_{US} \\), \\( \mathbf{\hat{y}}_M \\), and  \\( \mathbf{\hat{y}} \\) are the ultrasound, mammography, and fusion class predictions respectively.
 
