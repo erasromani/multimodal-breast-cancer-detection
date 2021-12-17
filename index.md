@@ -70,7 +70,7 @@ For all late fusion methods, we ran three sets of experiments; (1) network is tr
 
 <figure align="center">
   <img src="https://erasromani.github.io/multimodal-breast-cancer-detection/images/table.png" alt="table"/>
-  <figcaption>Table 1: Validation AUROC results associated with best performing late fusion models trained until convergence with early stopping.)</figcaption>
+  <figcaption>Table 1: Validation AUROC results associated with best performing late fusion models trained until convergence with early stopping.</figcaption>
 </figure>
 
 Late fusion experiment results are shown in Table \ref{tbl:latefusion}. Column headers "End-to-end", "Fine-tune fusion module", and "Fine-tune whole network" in Table \ref{tbl:latefusion} correspond to experiments (1), (2), and (3) discussed in the prior paragraph respectively. Loading pre-trained weights for the single modality networks before training yields a significant improvement in performance. Fine-tuning the whole network yields inconclusive results as performance does not necessarily increase in comparison to using a pre-trained single modality network and fine-tuning just the fusion module. The best performing model is the pre-trained transformer-based late fusion model in which only the fusion module is fine-tuned, resulting in 0.900 validation AUROC.
