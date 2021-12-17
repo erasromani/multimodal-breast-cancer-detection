@@ -58,7 +58,7 @@ $$\boldsymbol{\alpha}_{US} = \sum_{k \in US} \boldsymbol{\alpha}_k, \quad
 
 A fused prediction is produced by
 
-$$ \mathbf{\hat{y}} = \boldsymbol{\alpha}\_{US} \mathbf{\hat{y}}\_{US} + \boldsymbol{\alpha}\_{M} \mathbf{\hat{y}}\_M $$
+$$ \mathbf{\hat{y}} = \boldsymbol{\alpha}_{US} \mathbf{\hat{y}}_{US} + \boldsymbol{\alpha}_{M} \mathbf{\hat{y}}_M $$
 
 where \\( \mathbf{\hat{y}}_{US} \\), \\( \mathbf{\hat{y}}_M \\), and  \\( \mathbf{\hat{y}} \\) are the ultrasound, mammography, and fusion class predictions respectively.
 
