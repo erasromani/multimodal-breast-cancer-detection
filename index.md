@@ -41,7 +41,7 @@ where \\(\textrm{BCE}\\) is the binary cross-entropy loss function, \\(\mathbf{y
 
 For late representation fusion, the loss function is given by
 
-$$ L(\mathbf{y}, \mathbf{\hat{y}},\mathbf{A}) = \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{fusion}) + \beta \sum_{(i, j)}|\mathbf{A}[i, j]_M| + \gamma \sum_{(i, j)}|\mathbf{A}[i, j]_{US}|.$$
+$$ L(\mathbf{y}, \mathbf{\hat{y}},\mathbf{A}) = \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}_{fusion}) + \beta \sum_{(i, j)}|\mathbf{A}[i, j]_M| + \gamma \sum_{(i, j)}|\mathbf{A}[i, j]_{US}|. \tag{(1)} $$
 
 Late representation fusion experiments suggest that modality-specific BCE loss results in performance degradation hence the \\( \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}\_{US}) \\) and \\( \textrm{BCE}(\mathrm{y}, \mathrm{\hat{y}}\_{M}) \\) terms were dropped from the loss function resulting in Equation \ref{eq:loss_no_gblend}.
 
