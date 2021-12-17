@@ -20,7 +20,7 @@ In Shen at al. 2021b, a neural network is developed with the objective of reduci
 
 <figure align="center">
   <img src="https://erasromani.github.io/multimodal-breast-cancer-detection/images/nets.png" alt="nets"/>
-  <figcaption>Figure 1: Single modality networks for ultrasound and mammography.)</figcaption>
+  <figcaption>Figure 1: Single modality networks for ultrasound and mammography.</figcaption>
 </figure>
 
 ## Experimental Evaluation
