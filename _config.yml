@@ -1,1 +1,3 @@
 theme: jekyll-theme-cayman
+title: Multi-modal Breast Cancer Detection
+description: Leveraging multiple modalities to reduce false negative rates in breast cancer screening with AI
